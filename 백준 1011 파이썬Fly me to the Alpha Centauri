@@ -1,0 +1,48 @@
+
+
+def findShortCut(lightdistance):
+
+    sum = 0
+    number = 0
+    result = 0
+    while lightdistance >= 2 * sum:
+        result = sum, number
+        number += 1
+        sum = sum + number
+    new_sum, new_number = result
+    new_number = int(new_number)
+    new_sum = int(new_sum)
+    countMoved = new_number * 2
+    remain = lightdistance - 2*new_sum
+    onewayNumber = new_number + 1
+    while onewayNumber > 0:
+        if remain > onewayNumber:
+            onewayNumber -= 1
+            remain = remain - onewayNumber
+            countMoved += 1
+        elif remain < onewayNumber:
+            onewayNumber -= 1
+            continue
+        else:
+            onewayNumber -= remain
+            countMoved += 1
+    return countMoved
+
+
+lineNumber = input()
+lineNumber = int(lineNumber)
+distance_list = list()
+while lineNumber > 0:
+    lineNumber -= 1
+    distance_list.append(input())
+for i in distance_list:
+    x,y = i.split()
+    distance = int(y) - int(x)
+    print(findShortCut(distance))
+
+# print(distanceList)
+# # ['0 3', '1 5', '45 50']
+
+
+
+
